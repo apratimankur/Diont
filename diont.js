@@ -33,7 +33,12 @@ module.exports = function(options){
 	// Set up UDP Broadcast/Multicast connection
 	// =====
 
-	socket.bind(port);
+	try{
+		socket.bind(port);
+	}catch(e){
+		console.log("Error: ", e);
+		// return;
+	}
 	socket.on('listening', function() {
 		socket.setMulticastLoopback(true);
 		socket.setMulticastTTL(ttl);
